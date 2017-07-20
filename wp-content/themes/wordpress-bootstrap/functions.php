@@ -1,5 +1,10 @@
 <?php
 
+// Import widgets
+require_once('widgets/class-wp-widget-categories.php');
+require_once('widgets/class-wp-widget-recent-comments.php');
+require_once('widgets/class-wp-widget-recent-posts.php');
+
 // Register Custom Navigation Walker
 require_once('wp-bootstrap-navwalker.php');
 
@@ -29,4 +34,20 @@ function init_widgets($id) {
 
 add_action('widgets_init', 'init_widgets');
 
-?>
+// Adds 'list-group-item' to categories li
+function add_new_class_list_categories($list) {
+    $list = str_replace('cat-item', 'cat-item list-group-item', $list);
+    return $list;
+}
+
+add_filter('wp_list_categories', 'add_new_class_list_categories');
+
+
+// Register Widgets
+function wordpress_bootstrap_register_widgets() {
+    register_widget('WP_Widget_Categories_Custom');
+    register_widget('WP_Widget_Recent_Comments_Custom');
+    register_widget('WP_Widget_Recent_Posts_Custom');
+}
+
+add_action('widgets_init', 'wordpress_bootstrap_register_widgets');
