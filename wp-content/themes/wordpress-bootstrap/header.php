@@ -32,8 +32,12 @@
                     'walker'            => new WP_Bootstrap_Navwalker())
             );
             ?>
-            <form class="navbar-form navbar-left" role="search">
-
+            <form method="get" class="navbar-form navbar-right" role="search" action="<?php echo esc_url(home_url('/')); ?>">
+                <label for="navbar-search" class="sr-only"><?php _e('Search', 'textdomain') ?></label>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="s" id="navbar-search">
+                </div>
+                <button type="submit" class="btn btn-default"><?php _e('Search', 'textdomain') ?></button>
             </form>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
